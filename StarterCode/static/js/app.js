@@ -1,4 +1,4 @@
-// from data.js
+// from data.js get the data.
 var tableData = data;
 
 // Getting tbody tag
@@ -14,10 +14,28 @@ var tr_tag;
 //Set button for later user to click
 var button = d3.select("#filter-btn");
 
-//Code to just render all the table content.
-
+//Code to just render all the table content. Outside of click.
+//------------------------------------------------------------------
+tableData.forEach(function(name){
+  tr_tag=document.createElement('tr');
+  
+  columns.forEach(function(column){ 
+    //console.log(column)
+    var td_tag=document.createElement('td');
+    var td_text=document.createTextNode(name[column]);
+   //console.log(td_text);
+    td_tag.appendChild(td_text);
+    //console.log(td_tag);
+   tr_tag.appendChild(td_tag);  
+  });
+ 
+  //console.log(tr_tag);
+  tbody_tag.appendChild(tr_tag); 
+});
+//-------------------------------------------------------------------------    
 
 //Code for button click and to filter the data based on user preference.
+//-----------------------------------------------------------------------------
 button.on("click", function() {
   //Clear previous search results.
 tbody_tag.innerHTML=" ";
@@ -68,9 +86,5 @@ tableData.forEach(function(name){
   //console.log(tr_tag);
   tbody_tag.appendChild(tr_tag);
 
-  //fill the td
-  //tr_tag.appendChild(td_tag);
-  //var textnode= document.createTextNode(name);
- 
 });
 });
